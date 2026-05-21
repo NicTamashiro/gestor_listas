@@ -81,9 +81,9 @@ void remover_lista(){
     limpar_buffer();
 
     if(remove(nomearq) == 0){
-        printf("Arquivo removido com sucesso!\n\n");
+        printf("\nArquivo removido com sucesso!\n\n");
     } else {
-        printf("Erro ao apagar arquivos.\n");
+        printf("\nErro ao apagar arquivos.\n");
     }
 
     aguardar();
@@ -91,7 +91,24 @@ void remover_lista(){
 }
 
 void renomear_lista(){
-    return;
+    char nome_antigo[50];
+    char nome_novo[50];
+
+    printf("\nQual o nome do arquivo que deseja renomear: <nomearq.txt>\n");
+    scanf("%s", nome_antigo);
+    limpar_buffer();
+    printf("\nQual o sera o novo nome do arquivo '%s': <nomearq.txt>\n", nome_antigo);
+    scanf("%s", nome_novo);
+    limpar_buffer();
+
+    if(rename(nome_antigo, nome_novo) == 0){
+        printf("\nArquivo renomeado com sucesso! ('%s') -> ('%s')\n", nome_antigo, nome_novo);
+    } else {
+        printf("\nErro ao renomear arquivo '%s'\n", nome_antigo);
+    }
+
+    aguardar();
+    
 }
 
 void adicionar_item(){
