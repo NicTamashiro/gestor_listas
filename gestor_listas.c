@@ -213,8 +213,14 @@ void ver_lista(){
     }
     
     char linha[200];
-    while(fgets(linha, sizeof(linha), fp) != NULL){
+    if(fgets(linha, sizeof(linha), fp) == NULL){
+        printf("Lista vazia!\n");
+    } else {
         printf("%s", linha);
+
+        while(fgets(linha, sizeof(linha), fp) != NULL){
+            printf("%s", linha);
+        }
     }
 
     fclose(fp);
