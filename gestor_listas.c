@@ -112,7 +112,39 @@ void renomear_lista(){
 }
 
 void adicionar_item(){
-    return;
+
+    char lista[50];
+    char item[150];
+
+    printf("\nQual lista deseja adicionar um item: <nomearq.txt>\n");
+    scanf(" %s", lista);
+    limpar_buffer();
+    printf("\nQual item deseja adicionar? \n");
+    scanf(" %149[^\n]", item);
+    limpar_buffer();
+
+    FILE * fp;
+
+    if((fp = fopen(lista, "r")) == NULL){
+        printf("Erro: arquivo nao encontrado");
+        aguardar();
+    } else {
+        int count = 0;
+        char linha[200];
+        while(fgets(linha, sizeof(linha), fp) != NULL){
+            count++;
+        }
+        fclose(fp);
+
+        fp = fopen(lista, "a");
+
+        fprintf(fp, "%d. %s\n", count + 1, item);
+        fclose(fp);
+
+        printf("\nItem adicionado com sucesso!\n\n");
+        aguardar();
+    }
+
 }
 
 void remover_item(){
