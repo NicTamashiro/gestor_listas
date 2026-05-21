@@ -34,20 +34,43 @@ void limpar_buffer(){
     while((c = getchar()) != '\n' && c != EOF);
 }
 
+void aguardar(){
+    printf("Pressione ENTER para continuar...");
+    limpar_buffer();
+}
+
 int ler_inteiro(){
     int opcao, valido;
     do {
         valido = (scanf("%d", &opcao) == 1 && opcao >= 0 && opcao <=6);
         limpar_buffer();
         if(!valido){
-            printf("  Entrada invalida. Digite entre \"0 e 6\"!\n\n");
+            printf("Entrada invalida. Digite entre \"0 e 6\"!\n\n");
         }
     } while(!valido);
     return opcao;
 }
 
 void criar_lista(){
-    return;
+    FILE * fp;
+    char nomearq[50];
+
+    printf("\nQual o nome do arquivo que deseja criar: <nomearq.txt>\n");
+    scanf("%s", nomearq);
+    limpar_buffer();
+    fp = fopen(nomearq, "w");
+
+    if(fp == NULL){
+        printf("Erro ao criar o arquivo '%s'\n", nomearq);
+        return;
+    }
+
+    printf("\nArquivo '%s' criado com sucesso!\n\n", nomearq);
+
+    aguardar();
+
+    fclose(fp);
+
 }
 
 void remover_lista(){
@@ -81,7 +104,7 @@ int menu(){
     printf("  [5] Remover item de uma lista\n");
     printf("  [6] Ver conteudo de uma lista\n");
     printf("  [0] Sair\n\n");
-    printf("  Escolha uma opcao: ");
+    printf("Escolha uma opcao: ");
     int opcao = ler_inteiro();
 
     return opcao;
