@@ -64,13 +64,11 @@ void criar_lista(){
         printf("Erro ao criar o arquivo '%s'\n", nomearq);
         return;
     }
+    fclose(fp);
 
     printf("\nArquivo '%s' criado com sucesso!\n\n", nomearq);
 
     aguardar();
-
-    fclose(fp);
-
 }
 
 void remover_lista(){
@@ -149,7 +147,6 @@ void adicionar_item(){
 
 void remover_item(){
     char lista[50];
-    char item[150];
     
     printf("\nQual lista deseja remover um item: <nomearq.txt>\n");
     scanf(" %s", lista);
@@ -180,9 +177,13 @@ void remover_item(){
         FILE *temp = fopen("temp.txt", "w");
 
         int contador = 1;
-        while(fgets(linha,sizeof(linha), fp) != NULL){
+        int novo_numero = 1;
+        while(fgets(linha, sizeof(linha), fp) != NULL){
             if(contador != remover){
-                fprintf(temp, "%s", linha);
+                char *texto = strchr(linha, '.');
+                texto+=2;
+                fprintf(temp, "%d. %s", novo_numero, texto);
+                novo_numero++;
             }
             contador++;
         }
