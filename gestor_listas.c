@@ -74,7 +74,20 @@ void criar_lista(){
 }
 
 void remover_lista(){
-    return;
+    char nomearq[50];
+
+    printf("\nQual o nome do arquivo que deseja remover: <nomearq.txt>\n");
+    scanf("%s", nomearq);
+    limpar_buffer();
+
+    if(remove(nomearq) == 0){
+        printf("Arquivo removido com sucesso!\n\n");
+    } else {
+        printf("Erro ao apagar arquivos.\n");
+    }
+
+    aguardar();
+
 }
 
 void renomear_lista(){
