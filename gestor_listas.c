@@ -164,7 +164,7 @@ void remover_item(){
         int count = 1;
         char linha[200];
         while(fgets(linha, sizeof(linha), fp) != NULL){
-            printf("%s\n", linha);
+            printf("%s", linha);
             count++;
         }
 
@@ -214,8 +214,9 @@ void ver_lista(){
     
     char linha[200];
     if(fgets(linha, sizeof(linha), fp) == NULL){
-        printf("Lista vazia!\n");
+        printf("\nLista vazia!\n");
     } else {
+        printf("\n");
         printf("%s", linha);
 
         while(fgets(linha, sizeof(linha), fp) != NULL){
@@ -225,6 +226,7 @@ void ver_lista(){
 
     fclose(fp);
 
+    printf("\n");
     aguardar();
 }
 
