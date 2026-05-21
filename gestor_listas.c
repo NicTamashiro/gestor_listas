@@ -126,7 +126,7 @@ void adicionar_item(){
     FILE * fp;
 
     if((fp = fopen(lista, "r")) == NULL){
-        printf("Erro: arquivo nao encontrado");
+        printf("Erro: arquivo nao encontrado.\n");
         aguardar();
     } else {
         int count = 0;
@@ -148,11 +148,78 @@ void adicionar_item(){
 }
 
 void remover_item(){
-    return;
+    char lista[50];
+    char item[150];
+    
+    printf("\nQual lista deseja remover um item: <nomearq.txt>\n");
+    scanf(" %s", lista);
+    limpar_buffer();
+    
+    FILE * fp;
+    
+    if((fp = fopen(lista, "r")) == NULL){
+        printf("Erro: arquivo nao encontrado.\n");
+        aguardar();
+    } else {
+        int count = 1;
+        char linha[200];
+        while(fgets(linha, sizeof(linha), fp) != NULL){
+            printf("%s\n", linha);
+            count++;
+        }
+
+        fclose(fp);
+
+        int remover;
+        printf("\nQual linha deseja remover: ");
+        scanf("%d", &remover);
+        limpar_buffer();
+
+        fp = fopen(lista, "r");
+
+        FILE *temp = fopen("temp.txt", "w");
+
+        int contador = 1;
+        while(fgets(linha,sizeof(linha), fp) != NULL){
+            if(contador != remover){
+                fprintf(temp, "%s", linha);
+            }
+            contador++;
+        }
+       
+        fclose(fp);
+        fclose(temp);
+
+        remove(lista);
+        rename("temp.txt", lista);
+
+        printf("\nItem removido com sucesso!\n\n");
+        aguardar();
+    }
 }
 
 void ver_lista(){
-    return;
+    char lista[50];
+    printf("\nQual lista deseja ver o conteudo? \n");
+    scanf("%s", lista);
+    limpar_buffer();
+    
+    FILE * fp;
+    
+    fp = fopen(lista, "r");
+    if(fp == NULL){
+        printf("Erro: arquivo nao encontrado.\n");
+        return;
+    }
+    
+    char linha[200];
+    while(fgets(linha, sizeof(linha), fp) != NULL){
+        printf("%s", linha);
+    }
+
+    fclose(fp);
+
+    aguardar();
 }
 
 
