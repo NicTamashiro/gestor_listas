@@ -201,7 +201,7 @@ void remover_item(){
 
 void ver_lista(){
     char lista[50];
-    printf("\nQual lista deseja ver o conteudo? \n");
+    printf("\nQual lista deseja ver o conteudo? <nomearq.txt>\n");
     scanf("%s", lista);
     limpar_buffer();
     
